@@ -19,6 +19,7 @@
 		<mongock.version>4.3.8</mongock.version>
 		<version.mapstruct>1.5.5.Final</version.mapstruct>
 		<version.lombok-mapstruct-binding>0.2.0</version.lombok-mapstruct-binding>
+		<version.testcontainers>1.21.0</version.testcontainers>
 	</properties>
 
 	<dependencies>
@@ -86,6 +87,19 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--todo настроить контейнеры для тестов -->
+<!--		<dependency>-->
+<!--			<groupId>org.testcontainers</groupId>-->
+<!--			<artifactId>testcontainers</artifactId>-->
+<!--			<version>${version.testcontainers}</version>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.testcontainers</groupId>-->
+<!--			<artifactId>mongodb</artifactId>-->
+<!--			<version>${version.testcontainers}</version>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>

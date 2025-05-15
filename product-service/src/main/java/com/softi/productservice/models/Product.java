@@ -39,4 +39,6 @@ public class Product {
 
     private LocalDateTime updatedAt;
 
+    private Boolean isActive;
+
 }
