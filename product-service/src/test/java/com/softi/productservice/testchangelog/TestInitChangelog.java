@@ -46,12 +46,12 @@ public class TestInitChangelog {
     public void initProducts(ProductRepository productRepository) {
         Product tempProductIPhone14 = new Product();
         tempProductIPhone14.setName("IPhone 14");
-        tempProductIPhone14.setCategories(List.of(categoryPhones));
+        tempProductIPhone14.setCategoryIds(List.of(categoryPhones.getId()));
         productIPhone14 = productRepository.save(tempProductIPhone14);
 
         Product tempProductGooglePixel7 = new Product();
         tempProductGooglePixel7.setName("Google Pixel 7");
-        tempProductGooglePixel7.setCategories(List.of(categoryPhones));
+        tempProductGooglePixel7.setCategoryIds(List.of(categoryPhones.getId()));
         productGooglePixel7 = productRepository.save(tempProductGooglePixel7);
     }
 }

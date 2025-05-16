@@ -20,7 +20,7 @@ public class Category {
 
     private String name;
 
-    @DBRef
+    @DBRef(lazy = true)
     private Category parentCategory;
 
 }

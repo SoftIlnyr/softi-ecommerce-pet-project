@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -31,9 +32,9 @@ public class Product {
 
     private Double price;
 
-    private List<String> attributes;
+    private Map<String, String> attributes;
 
-    private List<Category> categories;
+    private List<String> categoryIds;
 
     private LocalDateTime createdAt;
 
