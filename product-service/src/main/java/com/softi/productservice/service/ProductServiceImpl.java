@@ -1,9 +1,9 @@
 package com.softi.productservice.service;
 
+import com.softi.common.exception.EntityNotFoundException;
 import com.softi.productservice.dto.EditProductDto;
 import com.softi.productservice.dto.ProductDto;
 import com.softi.productservice.dto.ProductSearchCriteria;
-import com.softi.productservice.exception.EntityNotFoundException;
 import com.softi.productservice.mapper.ProductMapper;
 import com.softi.productservice.models.Category;
 import com.softi.productservice.models.Product;

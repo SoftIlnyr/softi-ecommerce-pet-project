@@ -36,6 +36,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- Модули проекта -->
+		<dependency>
+			<groupId>com.softi</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

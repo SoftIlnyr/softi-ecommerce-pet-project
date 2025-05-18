@@ -1,7 +1,7 @@
 package com.softi.productservice.rest;
 
+import com.softi.common.exception.EntityNotFoundException;
 import com.softi.productservice.dto.CategoryDto;
-import com.softi.productservice.exception.EntityNotFoundException;
 import com.softi.productservice.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

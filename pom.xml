@@ -12,5 +12,7 @@
 
     <modules>
         <module>product-service</module>
+        <module>inventory-service</module>
+        <module>common</module>
     </modules>
 </project>
