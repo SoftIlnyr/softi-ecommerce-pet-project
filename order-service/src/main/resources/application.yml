@@ -1,0 +1,26 @@
+server:
+  port: 8030
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27018 # when flapdoodle using
+      database: softi_ecommerce_orders
+
+mongock:
+  #runner-type: "ApplicationRunner" # default
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - com.softi.orderservice.changelog
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        wed: DEBUG
