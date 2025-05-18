@@ -19,12 +19,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "inventory")
+@Table(name = "inventories")
 public class InventoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "inventory_id")
+    @Column(name = "inventories_id")
     private long id;
 
     @Version
@@ -35,10 +35,10 @@ public class InventoryEntity {
     private String productId;
 
     @Column(name = "availableQuantity", nullable = false)
-    private Integer availableQuantity;
+    private Long availableQuantity;
 
     @Column(name = "reservedQuantity", nullable = false)
-    private Integer reservedQuantity;
+    private Long reservedQuantity;
 
     @Column(name = "last_updated")
     private LocalDateTime lastUpdateDateTime;

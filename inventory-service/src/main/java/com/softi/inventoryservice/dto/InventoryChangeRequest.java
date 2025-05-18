@@ -3,10 +3,9 @@ package com.softi.inventoryservice.dto;
 import lombok.Data;
 
 @Data
-public class InventoryReserveRequest {
+public class InventoryChangeRequest {
 
     private String productId;
-    private Long quantity;
     private String orderId;
 
 }

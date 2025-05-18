@@ -1,19 +1,28 @@
-CREATE TABLE inventory
+CREATE TABLE inventories
 (
-    inventory_id                 BIGSERIAL PRIMARY KEY,
+    inventories_id                 BIGSERIAL PRIMARY KEY,
     product_id         VARCHAR(50) NOT NULL,
-    available_quantity INT         NOT NULL DEFAULT 0,
-    reserved_quantity  INT         NOT NULL DEFAULT 0,
+    available_quantity BIGINT         NOT NULL DEFAULT 0,
+    reserved_quantity  BIGINT         NOT NULL DEFAULT 0,
     last_updated       TIMESTAMP,
-    version            INT         NOT NULL DEFAULT 0
+    version            BIGINT         NOT NULL DEFAULT 0
 );
 
-CREATE TABLE inventory_history
+CREATE TABLE inventory_histories
 (
-    id          BIGSERIAL PRIMARY KEY,
+    inventory_histories_id          BIGSERIAL PRIMARY KEY,
     product_id  VARCHAR(50) NOT NULL,
     change_type VARCHAR(20) NOT NULL, -- RESERVE, RELEASE, RESTOCK
-    quantity    INT         NOT NULL,
+    quantity    BIGINT         NOT NULL,
     order_id    VARCHAR(50), -- Для аудита
     created_at  TIMESTAMP
 );
+
+CREATE TABLE reserve_requests
+(
+    reserve_requests_id             BIGSERIAL PRIMARY KEY,
+    product_id  VARCHAR(50) NOT NULL,
+    order_id    VARCHAR(50) NOT NULL,
+    quantity    BIGINT         NOT NULL,
+    status      VARCHAR(50) NOT NULL
+)

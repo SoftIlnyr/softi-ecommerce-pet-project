@@ -1,7 +1,9 @@
 package com.softi.inventoryservice.rest;
 
 import com.softi.inventoryservice.dto.InventoryDto;
+import com.softi.inventoryservice.dto.InventoryChangeRequest;
 import com.softi.inventoryservice.dto.InventoryReserveRequest;
+import com.softi.inventoryservice.dto.InventoryRestockRequest;
 import com.softi.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,27 @@ public class InventoryController {
     }
 
     @PostMapping("/api/inventory/reserve")
-    ResponseEntity<InventoryDto> reserveInventory(@RequestBody InventoryReserveRequest inventoryReserveRequest) {
-        inventoryService.reserve(inventoryReserveRequest);
+    ResponseEntity<InventoryDto> reserveInventory(@RequestBody InventoryReserveRequest reserveRequest) {
+        InventoryDto reservedInventory = inventoryService.reserve(reserveRequest);
+        return ResponseEntity.ok(reservedInventory);
     }
+
+    @PostMapping("/api/inventory/release")
+    ResponseEntity<InventoryDto> releaseInventory(@RequestBody InventoryChangeRequest releaseRequest) {
+        InventoryDto releasedInventory = inventoryService.release(releaseRequest);
+        return ResponseEntity.ok(releasedInventory);
+    }
+
+    @PostMapping("/api/inventory/cancel")
+    ResponseEntity<InventoryDto> cancelInventory(@RequestBody InventoryChangeRequest releaseRequest) {
+        InventoryDto cancelledInventory = inventoryService.cancel(releaseRequest);
+        return ResponseEntity.ok(cancelledInventory);
+    }
+
+    @PostMapping("/api/inventory/restock")
+    ResponseEntity<InventoryDto> restockInventory(@RequestBody InventoryRestockRequest restockRequest) {
+        InventoryDto restockInventory = inventoryService.restock(restockRequest);
+        return ResponseEntity.ok(restockInventory);
+    }
+
 }

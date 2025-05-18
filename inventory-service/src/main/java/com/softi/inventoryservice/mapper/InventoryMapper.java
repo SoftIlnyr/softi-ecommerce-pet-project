@@ -7,8 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface InventoryMapper {
 
-    InventoryEntity toEntity(InventoryDto inventoryDto);
-
     InventoryDto toDto(InventoryEntity inventoryEntity);
 
 }
