@@ -5,6 +5,8 @@ import com.softi.inventoryservice.dto.InventoryChangeRequest;
 import com.softi.inventoryservice.dto.InventoryReserveRequest;
 import com.softi.inventoryservice.dto.InventoryRestockRequest;
 
+import java.time.LocalDateTime;
+
 public interface InventoryService {
 
     InventoryDto getById(Long id);
@@ -16,4 +18,6 @@ public interface InventoryService {
     InventoryDto cancel(InventoryChangeRequest releaseRequest);
 
     InventoryDto restock(InventoryRestockRequest restockRequest);
+
+    InventoryDto createInventory(String productId, LocalDateTime createdAt);
 }

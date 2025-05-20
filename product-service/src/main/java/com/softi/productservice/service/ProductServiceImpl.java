@@ -4,6 +4,7 @@ import com.softi.common.exception.EntityNotFoundException;
 import com.softi.productservice.dto.EditProductDto;
 import com.softi.productservice.dto.ProductDto;
 import com.softi.productservice.dto.ProductSearchCriteria;
+import com.softi.productservice.kafka.ProductsKafkaProducerService;
 import com.softi.productservice.mapper.ProductMapper;
 import com.softi.productservice.models.Category;
 import com.softi.productservice.models.Product;
@@ -28,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductMapper productMapper;
     private final MongoTemplate mongoTemplate;
+    private final ProductsKafkaProducerService kafkaProducerService;
 
     @Override
     public ProductDto findById(String productId) {
@@ -49,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
         product.setIsActive(true);
         product.setCategoryIds(categories.stream().map(Category::getId).toList());
         Product savedEntity = productRepository.save(product);
+        kafkaProducerService.createEventProductCreated(product.getId(), currentDateTime);
         return productMapper.toDto(savedEntity);
     }
 

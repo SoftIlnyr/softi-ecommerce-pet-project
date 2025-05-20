@@ -150,6 +150,17 @@ public class InventoryServiceImpl implements InventoryService {
         return inventoryMapper.toDto(saved);
     }
 
+    @Override
+    public InventoryDto createInventory(String productId, LocalDateTime localDateTime) {
+        InventoryEntity inventory = new InventoryEntity();
+        inventory.setProductId(productId);
+        inventory.setAvailableQuantity(0L);
+        inventory.setReservedQuantity(0L);
+        inventory.setLastUpdateDateTime(localDateTime);
+        InventoryEntity save = inventoryRepository.save(inventory);
+        return inventoryMapper.toDto(save);
+    }
+
     private InventoryEntity getInventory(String productId) {
         return inventoryRepository.findByProductId(productId).orElseThrow(() ->
                 new EntityNotFoundException("Inventory with id %s not found".formatted(productId)));
