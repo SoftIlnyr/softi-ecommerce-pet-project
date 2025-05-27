@@ -5,6 +5,7 @@ import com.softi.orderservice.dto.CreateOrderDto;
 import com.softi.orderservice.dto.OrderDto;
 import com.softi.orderservice.dto.OrderPaymentCredentials;
 import com.softi.orderservice.dto.OrderStatus;
+import com.softi.orderservice.kafka.OrderKafkaProducerService;
 import com.softi.orderservice.mapper.OrderMapper;
 import com.softi.orderservice.models.Order;
 import com.softi.orderservice.repository.OrderRepository;
@@ -22,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final OrderKafkaProducerService orderKafkaProducerService;
 
     @Override
     public List<OrderDto> getAllOrders() {
@@ -35,7 +37,10 @@ public class OrderServiceImpl implements OrderService {
         //todo order.setCustomerId(customerId);
         order.setStatus(OrderStatus.OPENED.name());
         Order savedOrder = orderRepository.save(order);
-        return orderMapper.toOrderDto(savedOrder);
+
+        OrderDto orderDto = orderMapper.toOrderDto(savedOrder);
+        orderKafkaProducerService.createEventOrderCreated(orderDto);
+        return orderDto;
     }
 
     @Override

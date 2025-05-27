@@ -1,6 +1,7 @@
 package com.softi.inventoryservice.mapper;
 
 import com.softi.inventoryservice.dto.InventoryDto;
+import com.softi.inventoryservice.dto.InventoryReserveRequest;
 import com.softi.inventoryservice.entity.InventoryEntity;
 import org.mapstruct.Mapper;
 
@@ -8,5 +9,7 @@ import org.mapstruct.Mapper;
 public interface InventoryMapper {
 
     InventoryDto toDto(InventoryEntity inventoryEntity);
+
+    InventoryReserveRequest toReserveRequest();
 
 }

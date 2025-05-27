@@ -1,12 +1,13 @@
 package com.softi.common.threads;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class ThreadWrapper {
 
-    private final ThreadPoolExecutor executor;
+    private final Executor executor;
 
-    public ThreadWrapper(ThreadPoolExecutor executor) {
+    public ThreadWrapper(Executor executor) {
         this.executor = executor;
     }
 

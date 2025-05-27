@@ -6,6 +6,7 @@ import com.softi.inventoryservice.dto.InventoryReserveRequest;
 import com.softi.inventoryservice.dto.InventoryRestockRequest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface InventoryService {
 

@@ -1,5 +1,6 @@
 package com.softi.orderservice.mapper;
 
+import com.softi.common.kafka.events.orderservice.OrderCreateEventPosition;
 import com.softi.orderservice.dto.CreateOrderDto;
 import com.softi.orderservice.dto.OrderDto;
 import com.softi.orderservice.dto.OrderItemDto;
@@ -27,4 +28,9 @@ public interface OrderMapper {
     List<OrderItemDto> toOrderItemList(List<OrderItem> orderItems);
 
     Order toOrder(CreateOrderDto createOrderDto);
+
+    OrderCreateEventPosition toEventDto(OrderItemDto orderItemDto);
+
+    List<OrderCreateEventPosition> toEventDtoList(List<OrderItemDto> orderItemDtos);
+
 }

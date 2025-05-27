@@ -1,4 +1,4 @@
-package com.softi.inventoryservice.configuration;
+package com.softi.orderservice.configuration;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -24,8 +24,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic productServiceEventsTopic() {
-        return new NewTopic("product_service_events", 3, (short) 1); // 3 партиции
+    public NewTopic orderCreateTopic() {
+        return new NewTopic("order_create", 3, (short) 1); // 3 партиции
     }
 
     @Bean
