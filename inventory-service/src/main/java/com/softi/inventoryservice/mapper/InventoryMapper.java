@@ -10,6 +10,4 @@ public interface InventoryMapper {
 
     InventoryDto toDto(InventoryEntity inventoryEntity);
 
-    InventoryReserveRequest toReserveRequest();
-
 }

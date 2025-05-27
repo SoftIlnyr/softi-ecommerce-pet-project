@@ -47,25 +47,20 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void payOrder(String orderId, OrderPaymentCredentials orderPaymentCredentials) {
         Order order = getOrder(orderId);
-        //todo kafka в payment service
-        //mock payment
         boolean paymentProcessed = Math.random() > 0.2;
         if (paymentProcessed) {
             order.setStatus(OrderStatus.RELEASED.name());
-            orderRepository.save(order);
-        } else {
-            processCancel(order);
+            Order savedOrder = orderRepository.save(order);
+            orderKafkaProducerService.createEventOrderPayed(order.getId());
         }
-
     }
 
     @Override
     @Transactional
     public void cancelOrder(String orderId) {
         Order order = getOrder(orderId);
-        //todo kafka в payment service
-        //mock payment
         processCancel(order);
+        orderKafkaProducerService.createEventOrderCancelled(order.getId());
     }
 
     private void processCancel(Order order) {

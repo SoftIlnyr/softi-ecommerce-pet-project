@@ -46,10 +46,10 @@ public class InventoryKafkaConsumerServiceImpl implements InventoryKafkaConsumer
         InventoryReserveResult reserveResult = inventoryReserveService.reserveAll(inventoryRequests);
     }
 
-    @Override
-    public void sendInventoryStatusEvent(InventoryReserveEvent inventoryReserveEvent) {
-
-
+    @KafkaListener(topics = "order_pay", groupId = "softi-ecommerce-inventory-service")
+    public void consumeOrderPayedEvent(String orderId) {
+        log.info("Received order payed event: {}", orderId);
+        inventoryService.releaseOrder(orderId);
     }
 
 }

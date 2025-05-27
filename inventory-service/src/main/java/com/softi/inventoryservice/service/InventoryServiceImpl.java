@@ -85,12 +85,10 @@ public class InventoryServiceImpl implements InventoryService {
         InventoryEntity inventoryEntity = getInventory(productId);
         ReserveRequestEntity reserveRequestEntity = getReserveRequest(productId, orderId);
 
-        Long quantity = reserveRequestEntity.getQuantity();
         LocalDateTime currentDateTime = LocalDateTime.now();
+        Long quantity = reserveRequestEntity.getQuantity();
 
-        inventoryEntity.setReservedQuantity(inventoryEntity.getReservedQuantity() - quantity);
-        inventoryEntity.setLastUpdateDateTime(currentDateTime);
-        InventoryEntity saved = inventoryRepository.save(inventoryEntity);
+        InventoryEntity saved = releaseInventory(inventoryEntity, quantity, currentDateTime);
 
         reserveRequestEntity.setStatus(ReserveRequestStatus.RELEASED.name());
         reserveRequestRepository.save(reserveRequestEntity);
@@ -105,6 +103,42 @@ public class InventoryServiceImpl implements InventoryService {
         inventoryHistoryRepository.save(inventoryHistoryEntity);
 
         return inventoryMapper.toDto(saved);
+    }
+
+    @Override
+    @Transactional
+    public List<InventoryDto> releaseOrder(String orderId) {
+        List<ReserveRequestEntity> reserveRequests = reserveRequestRepository.findAllByOrderId(orderId);
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        List<InventoryDto> result = new ArrayList<>();
+
+        for (var reserveRequest : reserveRequests) {
+            InventoryEntity inventoryEntity = getInventory(reserveRequest.getProductId());
+            Long quantity = reserveRequest.getQuantity();
+            InventoryEntity saved = releaseInventory(inventoryEntity, quantity, currentDateTime);
+
+            InventoryHistoryEntity inventoryHistoryEntity = new InventoryHistoryEntity();
+            inventoryHistoryEntity.setProductId(reserveRequest.getProductId());
+            inventoryHistoryEntity.setOrderId(orderId);
+            inventoryHistoryEntity.setQuantity(quantity);
+            inventoryHistoryEntity.setChangeType(InventoryChangeType.RELEASE.name());
+            inventoryHistoryEntity.setCreationDateTime(currentDateTime);
+
+            inventoryHistoryRepository.save(inventoryHistoryEntity);
+
+            result.add(inventoryMapper.toDto(saved));
+        }
+
+        return result;
+    }
+
+    private InventoryEntity releaseInventory(InventoryEntity inventoryEntity, Long quantity, LocalDateTime currentDateTime) {
+        inventoryEntity.setReservedQuantity(inventoryEntity.getReservedQuantity() - quantity);
+        inventoryEntity.setLastUpdateDateTime(currentDateTime);
+        InventoryEntity saved = inventoryRepository.save(inventoryEntity);
+        return saved;
     }
 
     @Override

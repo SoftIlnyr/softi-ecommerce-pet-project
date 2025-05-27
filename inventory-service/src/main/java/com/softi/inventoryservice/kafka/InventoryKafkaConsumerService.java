@@ -10,5 +10,4 @@ public interface InventoryKafkaConsumerService {
 
     void consumeOrderCreatedEvent(OrderCreateEvent orderCreateEvent);
 
-    void sendInventoryStatusEvent(InventoryReserveEvent inventoryReserveEvent);
 }

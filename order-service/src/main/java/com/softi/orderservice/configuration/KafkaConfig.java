@@ -29,6 +29,16 @@ public class KafkaConfig {
     }
 
     @Bean
+    public NewTopic orderPayTopic() {
+        return new NewTopic("order_pay", 3, (short) 1); // 3 партиции
+    }
+
+    @Bean
+    public NewTopic orderCancelTopic() {
+        return new NewTopic("order_cancel", 3, (short) 1); // 3 партиции
+    }
+
+    @Bean
     public NewTopic inventoryReserveStatusTopic() {
         return new NewTopic("inventory_reserve_events", 3, (short) 1);
     }

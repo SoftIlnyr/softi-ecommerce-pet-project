@@ -16,6 +16,8 @@ public interface InventoryService {
 
     InventoryDto release(InventoryChangeRequest releaseRequest);
 
+    List<InventoryDto> releaseOrder(String orderId);
+
     InventoryDto cancel(InventoryChangeRequest releaseRequest);
 
     InventoryDto restock(InventoryRestockRequest restockRequest);
