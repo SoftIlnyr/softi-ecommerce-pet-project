@@ -19,6 +19,6 @@ public class EditProductDto {
 
     private Map<String, String> attributes;
 
-    private List<String> categories;
+    private List<String> categoryIds;
 
 }

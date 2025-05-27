@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class InventoryController {
@@ -22,6 +24,12 @@ public class InventoryController {
     @GetMapping("/api/inventory/{id}")
     ResponseEntity<InventoryDto> getInventory(@PathVariable Long id) {
         return ResponseEntity.ok(inventoryService.getById(id));
+    }
+
+    @GetMapping("/api/inventory")
+    ResponseEntity<List<InventoryDto>> getAllInventory() {
+        List<InventoryDto> result = inventoryService.getAll();
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/api/inventory/reserve")

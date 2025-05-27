@@ -23,4 +23,6 @@ public interface InventoryService {
     InventoryDto restock(InventoryRestockRequest restockRequest);
 
     InventoryDto createInventory(String productId, LocalDateTime createdAt);
+
+    List<InventoryDto> getAll();
 }

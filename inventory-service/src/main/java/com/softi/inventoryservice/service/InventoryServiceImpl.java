@@ -44,6 +44,12 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
+    public List<InventoryDto> getAll() {
+        List<InventoryEntity> result = inventoryRepository.findAll();
+        return inventoryMapper.toDto(result);
+    }
+
+    @Override
     @Transactional
     @Retryable(
             retryFor = {ObjectOptimisticLockingFailureException.class, InsufficientStockException.class},
