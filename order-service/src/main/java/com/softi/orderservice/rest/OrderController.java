@@ -3,16 +3,15 @@ package com.softi.orderservice.rest;
 import com.softi.orderservice.dto.CreateOrderDto;
 import com.softi.orderservice.dto.OrderDto;
 import com.softi.orderservice.dto.OrderPaymentCredentials;
-import com.softi.orderservice.mapper.OrderMapper;
-import com.softi.orderservice.models.Order;
 import com.softi.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,14 +35,14 @@ public class OrderController {
     }
 
     @PutMapping("/api/orders/{orderId}/pay")
-    public ResponseEntity<OrderDto> payOrder(@RequestParam("orderId") String orderId,
-                                             OrderPaymentCredentials orderPaymentCredentials) {
+    public ResponseEntity<OrderDto> payOrder(@PathVariable("orderId") String orderId,
+                                             @RequestBody OrderPaymentCredentials orderPaymentCredentials) {
         orderService.payOrder(orderId, orderPaymentCredentials);
         return ResponseEntity.ok(new OrderDto());
     }
 
-    @PutMapping("/api/orders/{orderId}/cancel")
-    public ResponseEntity<OrderDto> cancelOrder(@RequestParam("orderId") String orderId) {
+    @PatchMapping("/api/orders/{orderId}/cancel")
+    public ResponseEntity<OrderDto> cancelOrder(@PathVariable("orderId") String orderId) {
         orderService.cancelOrder(orderId);
         return ResponseEntity.ok(new OrderDto());
     }

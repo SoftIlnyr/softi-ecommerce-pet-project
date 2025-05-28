@@ -37,19 +37,4 @@ public class InitChangelog {
         tempCategoryPhones.setParentCategory(categoryElectronics);
         categoryPhones = categoryRepository.save(tempCategoryPhones);
     }
-
-    @ChangeSet(order = "003", id = "003_init_products", author = "softi", runAlways = true)
-    public void initProducts(ProductRepository productRepository) {
-        Product tempProductIPhone14 = new Product();
-        tempProductIPhone14.setName("IPhone 14");
-        tempProductIPhone14.setCategoryIds(List.of(categoryPhones.getId()));
-        tempProductIPhone14.setIsActive(true);
-        productIPhone14 = productRepository.save(tempProductIPhone14);
-
-        Product tempProductGooglePixel7 = new Product();
-        tempProductGooglePixel7.setName("Google Pixel 7");
-        tempProductGooglePixel7.setCategoryIds(List.of(categoryPhones.getId()));
-        tempProductGooglePixel7.setIsActive(true);
-        productGooglePixel7 = productRepository.save(tempProductGooglePixel7);
-    }
 }
